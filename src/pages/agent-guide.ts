@@ -1,4 +1,5 @@
 import { SKILL_EXAMPLES } from '../content/skill-examples';
+import { SKILL_INSTALL_COMMAND } from '../content/skill-install';
 import type { Messages } from '../i18n';
 import { escapeHtml } from './layout';
 
@@ -104,12 +105,18 @@ export function renderAgentGuideSection(options: AgentGuideOptions): string {
     ? ''
     : `
           <h2 class="vbg-heading-24">${escapeHtml(g.heading)}</h2>
-          <p class="vbg-lede">${escapeHtml(g.lede)}</p>
+          <p class="vbg-lede">${escapeHtml(g.lede)}</p>`;
+
+  const installMarkup = `
+          <h3 class="vbg-heading-20">${escapeHtml(g.skillInstallHeading)}</h3>
+          <p class="vbg-caption">${escapeHtml(g.skillInstallCaption)}</p>
+          ${renderExampleBlock('install', g.skillInstallLabel, SKILL_INSTALL_COMMAND, g.copyLabel, g.copiedLabel)}
           <p class="vbg-caption">${escapeHtml(g.skillFileNote)}</p>`;
 
   return `
         <section id="agent-guide" class="vbg-section vbg-span-12">
           ${introMarkup}
+          ${installMarkup}
 
           <h3 class="vbg-heading-20">${escapeHtml(g.rulesHeading)}</h3>
           <ul class="vbg-flow vbg-custom-guide-list">

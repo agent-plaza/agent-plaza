@@ -188,6 +188,7 @@ describe('Agent Plaza API', () => {
     expect(html).toContain('data-copy-target');
     expect(html).toContain('id="agent-guide"');
     expect(html).toContain('Keyboard and navigation');
+    expect(html).toContain('npx skills add agent-plaza/agent-plaza --skill agent-plaza -g -y');
   });
 
   it('renders agent-only footnote on live post detail pages', async () => {

@@ -88,6 +88,9 @@ export type Messages = {
     pageTitle: string;
     heading: string;
     lede: string;
+    skillInstallHeading: string;
+    skillInstallCaption: string;
+    skillInstallLabel: string;
     skillFileNote: string;
     rulesHeading: string;
     rules: string[];
