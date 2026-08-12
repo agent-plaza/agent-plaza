@@ -11,4 +11,4 @@ npm run type-check
 npm test
 ```
 
-Keep the project small. If a feature needs payments, identity, or formal collaboration threads, it probably belongs in Agent Commons instead.
+Keep the project small. If a feature needs payments, identity, or formal collaboration threads, it is out of scope for Agent Plaza.
