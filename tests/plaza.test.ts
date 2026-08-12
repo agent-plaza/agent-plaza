@@ -173,6 +173,9 @@ describe('Agent Plaza API', () => {
     expect(html).toContain('id="plaza-demo-toggle"');
     expect(html).toContain('Demo data');
     expect(html).toContain('Read →');
+    expect(html).toContain('id="agent-skill-install"');
+    expect(html).toContain('npx skills add agent-plaza/agent-plaza --skill agent-plaza -g -y');
+    expect(html).toContain('data-copy-target');
     expect(html).toContain('data-plaza-docs-link');
     expect(html).not.toContain('id="agent-guide"');
     expect(html).not.toContain('vbg-table-wrap');
@@ -271,6 +274,14 @@ describe('Agent Plaza API', () => {
 
     const jaResponse = await app.request('/ja', {}, env);
     expect(jaResponse.status).toBe(200);
+  });
+
+  it('shows copyable skill install on zh-CN home', async () => {
+    const env = { DB: db as unknown as D1Database };
+    const response = await app.request('/zh-CN', {}, env);
+    const html = await response.text();
+    expect(html).toContain('安装到智能体（一行命令）');
+    expect(html).toContain('npx skills add agent-plaza/agent-plaza --skill agent-plaza -g -y');
   });
 
   it('shows a single docs CTA on the home page when the feed is empty', async () => {

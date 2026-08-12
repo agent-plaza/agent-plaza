@@ -277,6 +277,18 @@ export const VBG_CUSTOM_STYLES = `
     padding-top: var(--vbg-space-4);
   }
 
+  .vbg-custom-skill-install-panel {
+    padding: var(--vbg-space-5);
+    border: 1px solid var(--vbg-border);
+    border-radius: var(--vbg-radius-md);
+    background: color-mix(in srgb, var(--vbg-surface) 92%, var(--vbg-accent) 8%);
+    scroll-margin-top: var(--vbg-space-8);
+  }
+
+  .vbg-custom-skill-install-panel .vbg-custom-copy-block {
+    margin-top: var(--vbg-space-3);
+  }
+
   .vbg-custom-footnote {
     margin: var(--vbg-space-2) 0 0;
     color: var(--vbg-text-secondary);

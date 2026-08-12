@@ -1,37 +1,16 @@
 import { SKILL_EXAMPLES } from '../content/skill-examples';
-import { SKILL_INSTALL_COMMAND } from '../content/skill-install';
 import type { Messages } from '../i18n';
 import { escapeHtml } from './layout';
+import { renderExampleBlock, renderSkillInstallBlock } from './skill-install-block';
+
+export { renderSkillInstallBlock } from './skill-install-block';
 
 type AgentGuideOptions = {
   messages: Messages;
   docsPath?: string;
   skipIntro?: boolean;
+  includeSkillInstall?: boolean;
 };
-
-function renderExampleBlock(
-  exampleId: string,
-  label: string,
-  command: string,
-  copyLabel: string,
-  copiedLabel: string,
-): string {
-  const targetId = `skill-example-${exampleId}`;
-  return `
-          <div class="vbg-custom-copy-block">
-            <div class="vbg-custom-copy-head">
-              <p class="vbg-label">${escapeHtml(label)}</p>
-              <button
-                type="button"
-                class="vbg-custom-copy-btn"
-                data-copy-target="${escapeHtml(targetId)}"
-                data-default-label="${escapeHtml(copyLabel)}"
-                data-copied-label="${escapeHtml(copiedLabel)}"
-              >${escapeHtml(copyLabel)}</button>
-            </div>
-            <pre class="vbg-custom-code"><code id="${escapeHtml(targetId)}" class="vbg-mono" data-copy-base>${escapeHtml(command)}</code></pre>
-          </div>`;
-}
 
 export function renderAgentGuideSection(options: AgentGuideOptions): string {
   const g = options.messages.agentGuide;
@@ -107,16 +86,26 @@ export function renderAgentGuideSection(options: AgentGuideOptions): string {
           <h2 class="vbg-heading-24">${escapeHtml(g.heading)}</h2>
           <p class="vbg-lede">${escapeHtml(g.lede)}</p>`;
 
-  const installMarkup = `
-          <h3 class="vbg-heading-20">${escapeHtml(g.skillInstallHeading)}</h3>
-          <p class="vbg-caption">${escapeHtml(g.skillInstallCaption)}</p>
-          ${renderExampleBlock('install', g.skillInstallLabel, SKILL_INSTALL_COMMAND, g.copyLabel, g.copiedLabel)}
-          <p class="vbg-caption">${escapeHtml(g.skillFileNote)}</p>`;
+  const installMarkup =
+    options.includeSkillInstall === false
+      ? ''
+      : renderSkillInstallBlock({
+          messages: options.messages,
+          blockId: 'guide-install',
+          headingLevel: '20',
+          showDocsLink: false,
+        });
+
+  const skillFileNoteMarkup =
+    options.includeSkillInstall === false
+      ? ''
+      : `<p class="vbg-caption">${escapeHtml(g.skillFileNote)}</p>`;
 
   return `
         <section id="agent-guide" class="vbg-section vbg-span-12">
           ${introMarkup}
           ${installMarkup}
+          ${skillFileNoteMarkup}
 
           <h3 class="vbg-heading-20">${escapeHtml(g.rulesHeading)}</h3>
           <ul class="vbg-flow vbg-custom-guide-list">

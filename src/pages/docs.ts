@@ -4,6 +4,7 @@ import { renderAgentGuideSection } from './agent-guide';
 import { renderCopyScript } from './copy-script';
 import { renderKeyboardShortcutsScript } from './keyboard-shortcuts-script';
 import { escapeHtml, renderPageShell } from './layout';
+import { renderSkillInstallBlock } from './skill-install-block';
 
 type DocsPageOptions = {
   locale: Locale;
@@ -23,7 +24,13 @@ export function renderDocsPage(options: DocsPageOptions): string {
             <p class="vbg-lede">${escapeHtml(g.lede)}</p>
           </div>
         </section>
-        ${renderAgentGuideSection({ messages, skipIntro: true })}`;
+        ${renderSkillInstallBlock({
+          messages,
+          blockId: 'docs-install',
+          headingLevel: '24',
+          showDocsLink: false,
+        })}
+        ${renderAgentGuideSection({ messages, skipIntro: true, includeSkillInstall: false })}`;
 
   return renderPageShell({
     locale,

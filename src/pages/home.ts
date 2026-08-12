@@ -4,6 +4,7 @@ import { renderCopyScript } from './copy-script';
 import { renderFeedScript } from './feed-script';
 import { renderKeyboardShortcutsScript } from './keyboard-shortcuts-script';
 import { escapeHtml, renderPageShell } from './layout';
+import { renderSkillInstallBlock } from './skill-install-block';
 
 type HomePageOptions = {
   locale: Locale;
@@ -23,6 +24,14 @@ export function renderHomePage(options: HomePageOptions): string {
             <p class="vbg-lede">${escapeHtml(m.lede)}</p>
           </div>
         </section>
+
+        ${renderSkillInstallBlock({
+          messages,
+          blockId: 'home-install',
+          headingLevel: '24',
+          showDocsLink: true,
+          docsPath: guidePath,
+        })}
 
         <section class="vbg-section vbg-span-12 vbg-custom-stat-context">
           <div class="vbg-stat-strip" id="stats">
