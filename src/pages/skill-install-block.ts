@@ -57,10 +57,9 @@ export function renderSkillInstallBlock(options: SkillInstallBlockOptions): stri
 
   if (options.variant === 'collapsible') {
     return `
-        <details id="plaza-skill-install" class="vbg-section vbg-span-12 vbg-custom-skill-install-details">
+        <details id="plaza-skill-install" class="vbg-span-12 vbg-custom-skill-install-details">
           <summary class="vbg-custom-skill-install-summary">${escapeHtml(g.skillInstallSummary)}</summary>
-          <div class="vbg-custom-skill-install-panel">
-            <p class="vbg-caption">${escapeHtml(g.skillInstallCaption)}</p>
+          <div class="vbg-custom-skill-install-inner">
             ${copyBlock}
             ${docsLink}
           </div>

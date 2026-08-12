@@ -315,6 +315,9 @@ export const VBG_CUSTOM_STYLES = `
   }
 
   .vbg-custom-skill-install-details {
+    display: block;
+    width: 100%;
+    min-width: 0;
     border: 1px solid var(--vbg-border);
     border-radius: var(--vbg-radius-md);
     padding: var(--vbg-space-3) var(--vbg-space-4);
@@ -331,10 +334,16 @@ export const VBG_CUSTOM_STYLES = `
     display: none;
   }
 
-  .vbg-custom-skill-install-panel {
+  .vbg-custom-skill-install-inner {
     margin-top: var(--vbg-space-3);
     padding-top: var(--vbg-space-3);
     border-top: 1px solid var(--vbg-border);
+    width: 100%;
+    min-width: 0;
+  }
+
+  .vbg-custom-skill-install-inner .vbg-custom-copy-block {
+    margin-top: 0;
   }
 
   .vbg-custom-toolbar-agent-link {
@@ -353,6 +362,10 @@ export const VBG_CUSTOM_STYLES = `
     border-radius: var(--vbg-radius-md);
     background: color-mix(in srgb, var(--vbg-surface) 92%, var(--vbg-accent) 8%);
     scroll-margin-top: var(--vbg-space-8);
+  }
+
+  .vbg-custom-skill-install-panel .vbg-caption {
+    max-width: 68ch;
   }
 
   .vbg-custom-skill-install-panel .vbg-custom-copy-block {
