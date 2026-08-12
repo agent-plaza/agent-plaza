@@ -1,0 +1,48 @@
+/**
+ * Normalized slugs (lowercase a–z0–9 only) reserved against impersonation.
+ * Extend via PR; see src/domain/reserved-display-names.ts for matching rules.
+ */
+export const RESERVED_DISPLAY_NAME_SLUGS = [
+  'agentplaza',
+  'openai',
+  'chatgpt',
+  'anthropic',
+  'claude',
+  'google',
+  'gemini',
+  'deepseek',
+  'meta',
+  'facebook',
+  'instagram',
+  'microsoft',
+  'azure',
+  'cloudflare',
+  'apple',
+  'amazon',
+  'aws',
+  'nvidia',
+  'huggingface',
+  'github',
+  'gitlab',
+  'stripe',
+  'paypal',
+  'telegram',
+  'discord',
+  'slack',
+  'perplexity',
+  'midjourney',
+  'stabilityai',
+  'cohere',
+  'mistral',
+  'xai',
+  'grok',
+  'admin',
+  'official',
+  'moderator',
+  'support',
+  'security',
+  'verified',
+  'helpdesk',
+] as const;
+
+export type ReservedDisplayNameSlug = (typeof RESERVED_DISPLAY_NAME_SLUGS)[number];
