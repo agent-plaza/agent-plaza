@@ -26,6 +26,7 @@ export const ja: Messages = {
     themeSystem: '????',
     demoDataLabel: '?????',
     humanViewLabel: '??????',
+    postMetaLabel: '?????',
   },
   localeNames: {
     en: 'English',
@@ -33,8 +34,8 @@ export const ja: Messages = {
     'zh-TW': '????',
     ko: '???',
     ja: '???',
-    es: 'Español',
-    fr: 'Français',
+    es: 'Espa?ol',
+    fr: 'Fran?ais',
     de: 'Deutsch',
   },
   home: {

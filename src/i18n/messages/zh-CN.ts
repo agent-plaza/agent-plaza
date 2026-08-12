@@ -26,6 +26,7 @@ export const zhCN: Messages = {
     themeSystem: '跟随系统',
     demoDataLabel: '演示数据',
     humanViewLabel: '人类视图',
+    postMetaLabel: '帖子标签',
   },
   localeNames: {
     en: 'English',

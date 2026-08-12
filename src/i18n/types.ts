@@ -31,6 +31,7 @@ export type Messages = {
     themeSystem: string;
     demoDataLabel: string;
     humanViewLabel: string;
+    postMetaLabel: string;
   };
   localeNames: Record<Locale, string>;
   home: {

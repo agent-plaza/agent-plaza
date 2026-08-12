@@ -7,6 +7,7 @@ import {
   type Messages,
 } from '../i18n';
 import { renderHumanViewBootstrapScript, renderHumanViewScript } from './human-view-script';
+import { renderSignalMetaBootstrapScript, renderSignalMetaScript } from './signal-meta-script';
 
 export const VBG_CUSTOM_STYLES = `
   .vbg-custom-identity {
@@ -321,21 +322,28 @@ export const VBG_CUSTOM_STYLES = `
     margin-inline-start: calc(var(--vbg-custom-reply-depth, 0) * var(--vbg-space-6));
     border-inline-start: calc(var(--vbg-custom-reply-depth, 0) * 1px) solid var(--vbg-border-subtle);
     padding-inline-start: var(--vbg-space-4);
+    scroll-margin-top: 4.5rem;
+  }
+
+  .vbg-custom-reply:target {
+    background: var(--vbg-surface-secondary);
+    border-radius: var(--vbg-radius-small);
+    transition: background 0.25s ease;
   }
 
   .vbg-custom-reply-context {
-    margin: 0 0 var(--vbg-space-2);
+    margin-block: var(--vbg-space-1) var(--vbg-space-2);
+    color: var(--vbg-text-secondary);
   }
 
   .vbg-custom-reply-parent-link {
-    color: inherit;
-    margin-inline-start: var(--vbg-space-2);
+    color: var(--vbg-text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
   }
 
-  .vbg-custom-reply-api {
-    display: block;
-    margin-top: var(--vbg-space-2);
-    word-break: break-all;
+  .vbg-custom-reply-parent-link:hover {
+    color: var(--vbg-text-primary);
   }
 
   .vbg-custom-reply:first-child {
@@ -351,22 +359,6 @@ export const VBG_CUSTOM_STYLES = `
     overflow-wrap: anywhere;
   }
 
-  .vbg-custom-reply-context {
-    margin-block: var(--vbg-space-1) var(--vbg-space-2);
-    color: var(--vbg-text-secondary);
-  }
-
-  .vbg-custom-reply-parent-link {
-    color: inherit;
-    text-decoration: underline;
-    text-underline-offset: 0.15em;
-    margin-inline-start: var(--vbg-space-2);
-  }
-
-  .vbg-custom-reply-parent-link:hover {
-    color: var(--vbg-text-primary);
-  }
-
   .vbg-custom-reply-api {
     display: block;
     margin-top: var(--vbg-space-1);
@@ -377,6 +369,7 @@ export const VBG_CUSTOM_STYLES = `
     color: var(--vbg-text-secondary);
     font-size: var(--vbg-type-metadata);
     font-weight: var(--vbg-weight-regular);
+    letter-spacing: normal;
   }
 
   .vbg-custom-flower-badge,
@@ -615,6 +608,10 @@ export const PREFERENCES_STYLES = `
     display: none !important;
   }
 
+  html:not([data-plaza-signal-meta="true"]) .vbg-custom-signal-meta {
+    display: none !important;
+  }
+
   @media (max-width: 640px) {
     .vbg-masthead {
       flex-direction: column;
@@ -724,6 +721,10 @@ export function renderPreferencesBar(options: {
                   </select>
                 </div>
                 <div class="vbg-custom-toolbar-toggles">
+                  <label class="vbg-custom-demo-toggle" for="plaza-signal-meta-toggle">
+                    <input type="checkbox" id="plaza-signal-meta-toggle" />
+                    <span>${escapeHtml(messages.preferences.postMetaLabel)}</span>
+                  </label>
                   <label class="vbg-custom-demo-toggle" for="plaza-human-view-toggle">
                     <input type="checkbox" id="plaza-human-view-toggle" checked />
                     <span>${escapeHtml(messages.preferences.humanViewLabel)}</span>
@@ -883,6 +884,7 @@ export function renderPageShell(options: PageShellOptions): string {
     <style>${VBG_CUSTOM_STYLES}${PREFERENCES_STYLES}</style>
     ${renderThemeBootstrapScript()}
     ${renderHumanViewBootstrapScript()}
+    ${renderSignalMetaBootstrapScript()}
   </head>
   <body class="vbg-report" data-theme="auto">
     <div class="vbg-shell">
@@ -914,6 +916,7 @@ export function renderPageShell(options: PageShellOptions): string {
     </div>
     ${renderPreferencesScript()}
     ${renderHumanViewScript()}
+    ${renderSignalMetaScript()}
     ${scripts}
   </body>
 </html>`;

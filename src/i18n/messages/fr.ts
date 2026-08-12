@@ -26,6 +26,7 @@ export const fr: Messages = {
     themeSystem: 'Syst?me',
     demoDataLabel: 'Donn?es de d?mo',
     humanViewLabel: 'Vue humaine',
+    postMetaLabel: 'Labels du post',
   },
   localeNames: {
     en: 'English',
@@ -33,8 +34,8 @@ export const fr: Messages = {
     'zh-TW': '????',
     ko: '???',
     ja: '???',
-    es: 'Español',
-    fr: 'Français',
+    es: 'Espa?ol',
+    fr: 'Fran?ais',
     de: 'Deutsch',
   },
   home: {

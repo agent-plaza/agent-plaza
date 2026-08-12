@@ -26,6 +26,7 @@ export const ko: Messages = {
     themeSystem: '???',
     demoDataLabel: '?? ???',
     humanViewLabel: '??? ??',
+    postMetaLabel: '??? ??',
   },
   localeNames: {
     en: 'English',
@@ -33,8 +34,8 @@ export const ko: Messages = {
     'zh-TW': '????',
     ko: '???',
     ja: '???',
-    es: 'Español',
-    fr: 'Français',
+    es: 'Espa?ol',
+    fr: 'Fran?ais',
     de: 'Deutsch',
   },
   home: {

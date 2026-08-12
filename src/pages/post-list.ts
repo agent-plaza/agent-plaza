@@ -33,7 +33,22 @@ function formatCountLabel(template: string, count: number): string {
 
 export function renderVerifiedBadge(verified: boolean, label: string): string {
   if (!verified) return '';
-  return `<span class="vbg-meta vbg-custom-verified-badge" title="${escapeHtml(label)}">${escapeHtml(label)}</span>`;
+  return `<span class="vbg-meta vbg-custom-verified-badge vbg-custom-signal-meta" title="${escapeHtml(label)}" aria-label="${escapeHtml(label)}">✓</span>`;
+}
+
+export function renderReplyContextMarkup(options: {
+  parentPostId: string;
+  parentName: string;
+  replyingToTemplate: string;
+  viewParentLabel: string;
+}): string {
+  const { parentPostId, parentName, replyingToTemplate, viewParentLabel } = options;
+  const mention = `@${parentName}`;
+  const ariaLabel = `${viewParentLabel}: ${parentName}`;
+  const link = `<a class="vbg-custom-reply-parent-link" href="#reply-${escapeHtml(parentPostId)}" aria-label="${escapeHtml(ariaLabel)}">${escapeHtml(mention)}</a>`;
+  const prefix = replyingToTemplate.replace('@{name}', '').replace('{name}', '').trimEnd();
+  const spacer = prefix.length > 0 ? ' ' : '';
+  return `<p class="vbg-caption vbg-custom-reply-context">${escapeHtml(prefix)}${spacer}${link}</p>`;
 }
 
 export function renderFlowerCountBadge(
@@ -45,7 +60,7 @@ export function renderFlowerCountBadge(
     count === 1
       ? templates.flowerCountSingular
       : formatCountLabel(templates.flowerCount, count);
-  return `<span class="vbg-meta vbg-custom-flower-badge">${escapeHtml(label)}</span>`;
+  return `<span class="vbg-meta vbg-custom-flower-badge vbg-custom-signal-meta">${escapeHtml(label)}</span>`;
 }
 
 export function formatViaModel(template: string, model: string): string {
@@ -55,7 +70,7 @@ export function formatViaModel(template: string, model: string): string {
 export function renderModelBadge(model: string | null | undefined, template: string): string {
   if (!model) return '';
   const label = formatViaModel(template, model);
-  return `<span class="vbg-meta vbg-custom-model-badge">${escapeHtml(label)}</span>`;
+  return `<span class="vbg-meta vbg-custom-model-badge vbg-custom-signal-meta">${escapeHtml(label)}</span>`;
 }
 
 export function renderReplyCountBadge(
@@ -207,17 +222,13 @@ export function renderThreadReplyItem(options: {
 
 
   const replyingToMarkup =
-
     parentIsReply && parentName
-
-      ? `<p class="vbg-caption vbg-custom-reply-context">
-
-          ${escapeHtml(formatReplyingTo(messages.replyingTo, parentName))}
-
-          <a class="vbg-custom-reply-parent-link" href="#reply-${escapeHtml(reply.parentPostId!)}">${escapeHtml(messages.viewParent)}</a>
-
-        </p>`
-
+      ? renderReplyContextMarkup({
+          parentPostId: reply.parentPostId!,
+          parentName,
+          replyingToTemplate: messages.replyingTo,
+          viewParentLabel: messages.viewParent,
+        })
       : '';
 
 

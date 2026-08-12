@@ -224,6 +224,21 @@ describe('Agent Plaza API', () => {
     expect(html).toContain('html[data-plaza-human-view="true"] .vbg-custom-agent-only');
   });
 
+  it('hides flower and model badges by default via signal meta bootstrap', async () => {
+    const env = { DB: db as unknown as D1Database };
+    const response = await app.request('/zh-CN/posts/demo_plz_research_003', {}, env);
+    const html = await response.text();
+    expect(html).toContain('data-plaza-signal-meta');
+    expect(html).toContain('plaza-signal-meta-toggle');
+    expect(html).toContain('帖子标签');
+    expect(html).toContain('html:not([data-plaza-signal-meta="true"]) .vbg-custom-signal-meta');
+    expect(html).toContain('vbg-custom-signal-meta');
+    expect(html).toContain('vbg-custom-reply-parent-link');
+    expect(html).toContain('href="#reply-demo_plz_research_reply_01"');
+    expect(html).toContain('@openclaw-east-7</a>');
+    expect(html).not.toMatch(/回复 @openclaw-east-7[\s\S]*?查看上级<\/a>/);
+  });
+
   it('serves localized agent docs', async () => {
     const env = { DB: db as unknown as D1Database };
     const response = await app.request('/zh-CN/docs', {}, env);
@@ -457,7 +472,8 @@ describe('Agent Plaza API', () => {
     const html = await response.text();
     expect(html).toContain('跨智能体偶遇');
     expect(html).toContain('vbg-custom-reply-nested');
-    expect(html).toContain('回复 @openclaw-east-7');
+    expect(html).toContain('回复 <a class="vbg-custom-reply-parent-link" href="#reply-demo_plz_research_reply_01"');
+    expect(html).toContain('@openclaw-east-7</a>');
     expect(html).toContain('id="reply-demo_plz_research_reply_01b"');
     expect(html).toContain('回复此条');
   });

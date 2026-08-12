@@ -65,10 +65,6 @@ export function renderThreadScript(options: ThreadScriptOptions): string {
     }
   }
 
-  function formatReplyingTo(name) {
-    return CONFIG.replyingToTemplate.replace('{name}', name);
-  }
-
   function localePreferenceOrder(locale) {
     if (locale === 'zh-TW') return ['zh-TW', 'zh-CN', 'en'];
     if (locale === 'zh-CN') return ['zh-CN', 'en'];
@@ -113,12 +109,12 @@ export function renderThreadScript(options: ThreadScriptOptions): string {
   function renderModelBadge(item) {
     if (!item.model) return '';
     var label = CONFIG.viaModel.replace('{model}', item.model);
-    return '<span class="vbg-meta vbg-custom-model-badge">' + escapeHtml(label) + '</span>';
+    return '<span class="vbg-meta vbg-custom-model-badge vbg-custom-signal-meta">' + escapeHtml(label) + '</span>';
   }
 
   function renderVerifiedBadge(item) {
     if (!item.name_verified) return '';
-    return ' <span class="vbg-meta vbg-custom-verified-badge">' + escapeHtml(CONFIG.verifiedBadge) + '</span>';
+    return ' <span class="vbg-meta vbg-custom-verified-badge vbg-custom-signal-meta" title="' + escapeHtml(CONFIG.verifiedBadge) + '" aria-label="' + escapeHtml(CONFIG.verifiedBadge) + '">✓</span>';
   }
 
   function collectPostsById(existingMap, items) {
@@ -136,6 +132,15 @@ export function renderThreadScript(options: ThreadScriptOptions): string {
     return postsById;
   }
 
+  function renderReplyContext(parentPostId, parentName) {
+    var mention = '@' + parentName;
+    var ariaLabel = CONFIG.viewParentLabel + ': ' + parentName;
+    var link = '<a class="vbg-custom-reply-parent-link" href="#reply-' + escapeHtml(parentPostId) + '" aria-label="' + escapeHtml(ariaLabel) + '">' + escapeHtml(mention) + '</a>';
+    var prefix = CONFIG.replyingToTemplate.replace('@{name}', '').replace('{name}', '').trimEnd();
+    var spacer = prefix.length > 0 ? ' ' : '';
+    return '<p class="vbg-caption vbg-custom-reply-context">' + escapeHtml(prefix) + spacer + link + '</p>';
+  }
+
   function renderReply(item, postsById) {
     var depth = Math.min(item.depth || 0, 4);
     var indentStyle = depth > 0 ? ' style="--vbg-custom-reply-depth: ' + depth + '"' : '';
@@ -144,10 +149,7 @@ export function renderThreadScript(options: ThreadScriptOptions): string {
       ? postsById[item.parent_post_id].display_name
       : null;
     var replyingTo = parentIsReply && parentName
-      ? '<p class="vbg-caption vbg-custom-reply-context">' +
-          escapeHtml(formatReplyingTo(parentName)) +
-          ' <a class="vbg-custom-reply-parent-link" href="#reply-' + escapeHtml(item.parent_post_id) + '">' +
-          escapeHtml(CONFIG.viewParentLabel) + '</a></p>'
+      ? renderReplyContext(item.parent_post_id, parentName)
       : '';
 
     return (

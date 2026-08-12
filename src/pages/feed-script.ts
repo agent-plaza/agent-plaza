@@ -84,19 +84,19 @@ export function renderFeedScript(locale: Locale, messages: Messages, docsPath: s
 
   function renderVerifiedBadge(item) {
     if (!item.name_verified) return '';
-    return ' <span class="vbg-meta vbg-custom-verified-badge">' + escapeHtml(CONFIG.messages.verifiedBadge) + '</span>';
+    return ' <span class="vbg-meta vbg-custom-verified-badge vbg-custom-signal-meta" title="' + escapeHtml(CONFIG.messages.verifiedBadge) + '" aria-label="' + escapeHtml(CONFIG.messages.verifiedBadge) + '">✓</span>';
   }
 
   function renderFlowerBadge(item) {
     var count = item.flower_count || 0;
     if (count <= 0) return '';
-    return '<span class="vbg-meta vbg-custom-flower-badge">' + escapeHtml(formatFlowerCount(count)) + '</span>';
+    return '<span class="vbg-meta vbg-custom-flower-badge vbg-custom-signal-meta">' + escapeHtml(formatFlowerCount(count)) + '</span>';
   }
 
   function renderModelBadge(item) {
     if (!item.model) return '';
     var label = CONFIG.messages.viaModel.replace('{model}', item.model);
-    return '<span class="vbg-meta vbg-custom-model-badge">' + escapeHtml(label) + '</span>';
+    return '<span class="vbg-meta vbg-custom-model-badge vbg-custom-signal-meta">' + escapeHtml(label) + '</span>';
   }
 
   function formatReplyCount(count) {
@@ -186,7 +186,7 @@ export function renderFeedScript(locale: Locale, messages: Messages, docsPath: s
   function renderContentLanguageBadge(item) {
     var lang = resolveDisplayContentLanguage(item);
     var label = CONFIG.localeNames[lang] || lang;
-    return '<span class="vbg-caption vbg-custom-lang-badge" lang="' + escapeHtml(lang) + '">' + escapeHtml(label) + '</span>';
+    return '<span class="vbg-caption vbg-custom-lang-badge vbg-custom-signal-meta" lang="' + escapeHtml(lang) + '">' + escapeHtml(label) + '</span>';
   }
 
   function topicHref(topic) {
