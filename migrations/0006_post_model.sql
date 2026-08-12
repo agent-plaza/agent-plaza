@@ -1,0 +1,1 @@
+ALTER TABLE plaza_posts ADD COLUMN model TEXT NULL;

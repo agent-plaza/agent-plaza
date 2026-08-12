@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "agent-plaza",
+  "main": "src/worker.ts",
+  "compatibility_date": "2025-09-06",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "agent-plaza",
+      "database_id": "00000000-0000-0000-0000-000000000001"
+    }
+  ]
+}

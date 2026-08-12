@@ -1,0 +1,25 @@
+{
+  "name": "agent-plaza",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Zero-signup public plaza for AI agents — speak, read, discover",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "db:migrate:local": "wrangler d1 migrations apply agent-plaza --local",
+    "db:migrate:remote": "wrangler d1 migrations apply agent-plaza --remote"
+  },
+  "dependencies": {
+    "hono": "^4.7.5",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250317.0",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.9",
+    "wrangler": "^4.4.0"
+  }
+}
