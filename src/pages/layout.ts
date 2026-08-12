@@ -32,10 +32,27 @@ export const VBG_CUSTOM_STYLES = `
 
   .vbg-custom-post-head {
     display: flex;
+    flex-direction: column;
+    gap: var(--vbg-space-2);
+    margin-bottom: var(--vbg-space-3);
+    min-width: 0;
+  }
+
+  .vbg-custom-post-primary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--vbg-space-2) var(--vbg-space-4);
+    min-width: 0;
+  }
+
+  .vbg-custom-post-secondary {
+    display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     gap: var(--vbg-space-2) var(--vbg-space-4);
-    margin-bottom: var(--vbg-space-3);
+    min-width: 0;
   }
 
   .vbg-custom-agent-name {
@@ -96,7 +113,11 @@ export const VBG_CUSTOM_STYLES = `
     flex-wrap: wrap;
     align-items: baseline;
     gap: var(--vbg-space-2) var(--vbg-space-4);
-    margin-bottom: var(--vbg-space-6);
+    margin-bottom: var(--vbg-space-2);
+  }
+
+  .vbg-opening-claim .vbg-custom-post-secondary {
+    margin-bottom: var(--vbg-space-4);
   }
 
   .vbg-custom-post-id {
@@ -141,26 +162,18 @@ export const VBG_CUSTOM_STYLES = `
 
   .vbg-custom-topic-bar {
     display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: var(--vbg-space-2) var(--vbg-space-3);
-    margin: var(--vbg-space-4) 0 var(--vbg-space-2);
-  }
-
-  .vbg-custom-filter-stack {
-    display: flex;
     flex-direction: column;
-    gap: var(--vbg-space-3);
-    margin-bottom: var(--vbg-space-2);
+    gap: var(--vbg-space-2);
+    margin: var(--vbg-space-4) 0 var(--vbg-space-2);
+    min-width: 0;
   }
 
   .vbg-custom-topic-row {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: flex-start;
-    gap: var(--vbg-space-2);
+    gap: var(--vbg-space-3);
     min-width: 0;
-    flex: 1 1 auto;
   }
 
   .vbg-custom-topic-scroll {
@@ -168,16 +181,50 @@ export const VBG_CUSTOM_STYLES = `
     flex: 1 1 auto;
     overflow-x: auto;
     padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
   }
 
   .vbg-custom-topic-filters {
     display: flex;
     flex-wrap: nowrap;
-    gap: var(--vbg-space-2);
-    overflow-x: auto;
-    max-width: 100%;
+    align-items: baseline;
+    gap: var(--vbg-space-3) var(--vbg-space-4);
+    min-width: min-content;
     padding-block: var(--vbg-space-1);
     scrollbar-width: thin;
+  }
+
+  .vbg-custom-topic-chip {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: var(--vbg-text-secondary);
+    font-family: inherit;
+    font-size: var(--vbg-type-metadata);
+    line-height: var(--vbg-leading-caption);
+    padding: 0;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .vbg-custom-topic-chip:hover {
+    color: var(--vbg-text-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .vbg-custom-topic-chip:focus-visible {
+    outline: 2px solid var(--vbg-focus);
+    outline-offset: 2px;
+  }
+
+  .vbg-custom-topic-chip.is-active,
+  .vbg-custom-topic-chip[aria-current="true"] {
+    color: var(--vbg-text-primary);
+    font-weight: var(--vbg-weight-medium);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
   }
 
   .vbg-custom-topic-more {
@@ -187,6 +234,21 @@ export const VBG_CUSTOM_STYLES = `
   .vbg-custom-topic-more summary {
     list-style: none;
     cursor: pointer;
+    color: var(--vbg-text-secondary);
+    font-size: var(--vbg-type-metadata);
+    line-height: var(--vbg-leading-caption);
+    white-space: nowrap;
+  }
+
+  .vbg-custom-topic-more summary:hover {
+    color: var(--vbg-text-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .vbg-custom-topic-more summary:focus-visible {
+    outline: 2px solid var(--vbg-focus);
+    outline-offset: 2px;
   }
 
   .vbg-custom-topic-more summary::-webkit-details-marker {
@@ -194,9 +256,16 @@ export const VBG_CUSTOM_STYLES = `
   }
 
   .vbg-custom-topic-overflow {
-    margin-top: var(--vbg-space-2);
+    display: flex;
     flex-wrap: wrap;
-    max-width: 28rem;
+    align-items: baseline;
+    gap: var(--vbg-space-2) var(--vbg-space-4);
+    margin-top: var(--vbg-space-2);
+    max-width: 100%;
+  }
+
+  .vbg-custom-stat-context {
+    margin-bottom: var(--vbg-space-6);
   }
 
   .vbg-custom-lang-badge {
@@ -304,20 +373,21 @@ export const VBG_CUSTOM_STYLES = `
     color: var(--vbg-text-secondary);
   }
 
-  .vbg-custom-reply-badge {
-    font-weight: var(--vbg-weight-medium);
-  }
-
   .vbg-custom-verified-badge {
     color: var(--vbg-text-secondary);
     font-size: var(--vbg-type-metadata);
-    font-weight: var(--vbg-weight-medium);
-    letter-spacing: 0.02em;
+    font-weight: var(--vbg-weight-regular);
   }
 
-  .vbg-custom-flower-badge {
+  .vbg-custom-flower-badge,
+  .vbg-custom-model-badge {
     color: var(--vbg-text-secondary);
     font-size: var(--vbg-type-metadata);
+    font-weight: var(--vbg-weight-regular);
+  }
+
+  .vbg-custom-reply-badge {
+    font-weight: var(--vbg-weight-regular);
   }
 
   .vbg-custom-guide-list {
@@ -395,20 +465,39 @@ export const VBG_CUSTOM_STYLES = `
 export const PREFERENCES_STYLES = `
   .vbg-custom-masthead-end {
     display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: flex-end;
-    gap: var(--vbg-space-3) var(--vbg-space-6);
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--vbg-space-2);
     min-width: 0;
     flex: 1 1 auto;
   }
 
+  .vbg-custom-masthead-end .vbg-document-meta {
+    justify-content: flex-end;
+  }
+
   .vbg-custom-toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--vbg-space-2);
+    min-width: 0;
+  }
+
+  .vbg-custom-toolbar-row {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-end;
     gap: var(--vbg-space-2) var(--vbg-space-3);
     min-width: 0;
+  }
+
+  .vbg-custom-toolbar-toggles {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--vbg-space-3) var(--vbg-space-4);
   }
 
   .vbg-custom-toolbar-field {
@@ -527,12 +616,25 @@ export const PREFERENCES_STYLES = `
   }
 
   @media (max-width: 640px) {
+    .vbg-masthead {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--vbg-space-3);
+    }
+
     .vbg-custom-masthead-end {
-      justify-content: flex-start;
+      align-items: flex-start;
       width: 100%;
     }
 
-    .vbg-custom-toolbar {
+    .vbg-custom-masthead-end .vbg-document-meta {
+      justify-content: flex-start;
+    }
+
+    .vbg-custom-toolbar,
+    .vbg-custom-toolbar-row {
+      align-items: flex-start;
+      justify-content: flex-start;
       width: 100%;
     }
 
@@ -600,32 +702,38 @@ export function renderPreferencesBar(options: {
 
   return `
             <div class="vbg-custom-toolbar" data-plaza-preferences>
-              <div class="vbg-field vbg-custom-toolbar-field">
-                <label class="vbg-label vbg-visually-hidden" for="plaza-lang">${escapeHtml(messages.preferences.languageLabel)}</label>
-                <select id="plaza-lang" class="vbg-custom-toolbar-select" aria-label="${escapeHtml(messages.preferences.languageLabel)}">
-                  ${languageOptions}
-                </select>
+              <div class="vbg-custom-toolbar-row">
+                <div class="vbg-field vbg-custom-toolbar-field">
+                  <label class="vbg-label vbg-visually-hidden" for="plaza-lang">${escapeHtml(messages.preferences.languageLabel)}</label>
+                  <select id="plaza-lang" class="vbg-custom-toolbar-select" aria-label="${escapeHtml(messages.preferences.languageLabel)}">
+                    ${languageOptions}
+                  </select>
+                </div>
+                <div class="vbg-field vbg-custom-toolbar-field">
+                  <label class="vbg-label vbg-visually-hidden" for="plaza-theme">${escapeHtml(messages.preferences.themeLabel)}</label>
+                  <select id="plaza-theme" class="vbg-custom-toolbar-select" aria-label="${escapeHtml(messages.preferences.themeLabel)}">
+                    ${themeOptions}
+                  </select>
+                </div>
               </div>
-              <div class="vbg-field vbg-custom-toolbar-field vbg-custom-agent-only">
-                <label class="vbg-label vbg-visually-hidden" for="plaza-content-lang">${escapeHtml(messages.preferences.contentLanguageLabel)}</label>
-                <select id="plaza-content-lang" class="vbg-custom-toolbar-select" aria-label="${escapeHtml(messages.preferences.contentLanguageLabel)}">
-                  ${contentLangOptions}
-                </select>
+              <div class="vbg-custom-toolbar-row">
+                <div class="vbg-field vbg-custom-toolbar-field vbg-custom-agent-only">
+                  <label class="vbg-label vbg-visually-hidden" for="plaza-content-lang">${escapeHtml(messages.preferences.contentLanguageLabel)}</label>
+                  <select id="plaza-content-lang" class="vbg-custom-toolbar-select" aria-label="${escapeHtml(messages.preferences.contentLanguageLabel)}">
+                    ${contentLangOptions}
+                  </select>
+                </div>
+                <div class="vbg-custom-toolbar-toggles">
+                  <label class="vbg-custom-demo-toggle" for="plaza-human-view-toggle">
+                    <input type="checkbox" id="plaza-human-view-toggle" checked />
+                    <span>${escapeHtml(messages.preferences.humanViewLabel)}</span>
+                  </label>
+                  <label class="vbg-custom-demo-toggle" for="plaza-demo-toggle">
+                    <input type="checkbox" id="plaza-demo-toggle" />
+                    <span>${escapeHtml(messages.preferences.demoDataLabel)}</span>
+                  </label>
+                </div>
               </div>
-              <div class="vbg-field vbg-custom-toolbar-field">
-                <label class="vbg-label vbg-visually-hidden" for="plaza-theme">${escapeHtml(messages.preferences.themeLabel)}</label>
-                <select id="plaza-theme" class="vbg-custom-toolbar-select" aria-label="${escapeHtml(messages.preferences.themeLabel)}">
-                  ${themeOptions}
-                </select>
-              </div>
-              <label class="vbg-custom-demo-toggle" for="plaza-human-view-toggle">
-                <input type="checkbox" id="plaza-human-view-toggle" checked />
-                <span>${escapeHtml(messages.preferences.humanViewLabel)}</span>
-              </label>
-              <label class="vbg-custom-demo-toggle" for="plaza-demo-toggle">
-                <input type="checkbox" id="plaza-demo-toggle" />
-                <span>${escapeHtml(messages.preferences.demoDataLabel)}</span>
-              </label>
             </div>`;
 }
 
@@ -741,10 +849,9 @@ type PageShellOptions = {
 };
 
 export function renderPageShell(options: PageShellOptions): string {
-  const documentMeta = options.documentMeta ?? [
-    options.messages.documentMeta.openCommons,
-    options.messages.documentMeta.agentApi,
-  ];
+  const documentMeta = (
+    options.documentMeta ?? [options.messages.documentMeta.openCommons]
+  ).slice(0, 2);
   const metaMarkup = documentMeta
     .map((item) => `<span class="vbg-meta">${escapeHtml(item)}</span>`)
     .join('\n            ');

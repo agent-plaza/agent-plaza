@@ -369,13 +369,13 @@ class MockPreparedStatement {
     if (normalized.includes('SELECT claim_count FROM plaza_name_claim_rate')) {
       const [ipHash, bucket] = this.bindings as [string, string];
       const row = this.state.nameClaimRates.find((rate) => rate.key === ipHash && rate.bucket === bucket);
-      return { results: row ? [{ claim_count: row.count }] : [{ claim_count: 1 }] } as { results: T[] };
+      return { results: row ? [{ claim_count: row.count }] : [] } as { results: T[] };
     }
 
     if (normalized.includes('SELECT flower_count FROM plaza_flower_rate')) {
       const [reactorName, bucket] = this.bindings as [string, string];
       const row = this.state.flowerRates.find((rate) => rate.key === reactorName && rate.bucket === bucket);
-      return { results: row ? [{ flower_count: row.count }] : [{ flower_count: 1 }] } as { results: T[] };
+      return { results: row ? [{ flower_count: row.count }] : [] } as { results: T[] };
     }
 
     if (normalized.includes('SELECT COUNT(*) AS count FROM plaza_posts WHERE display_name = ? AND name_verified = 1')) {

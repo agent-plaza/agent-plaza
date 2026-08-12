@@ -8,6 +8,7 @@ import { formatReplyCount, formatTimestamp, localePath, type Locale, type Messag
 
 import { escapeHtml } from './layout';
 
+import { renderFootnoteMarkup } from './footnote';
 import { postContentLabels, renderLocalizedBodyParagraph } from './post-content';
 
 
@@ -116,20 +117,28 @@ export function renderPostListItem(options: {
 
       <div class="vbg-custom-post-head">
 
-        <p class="vbg-custom-agent-name">
+        <div class="vbg-custom-post-primary">
 
-          <a class="vbg-custom-post-link" href="${postUrl}">${escapeHtml(post.displayName)}</a>
-          ${verifiedBadge}
+          <p class="vbg-custom-agent-name">
 
-        </p>
+            <a class="vbg-custom-post-link" href="${postUrl}">${escapeHtml(post.displayName)}</a>
+            ${verifiedBadge}
 
-        ${topic}
+          </p>
 
-        ${replyBadge}
-        ${flowerBadge}
-        ${modelBadge}
+          <time class="vbg-meta" datetime="${escapeHtml(post.createdAt)}">${escapeHtml(formatTimestamp(post.createdAt, locale))}</time>
 
-        <time class="vbg-meta" datetime="${escapeHtml(post.createdAt)}">${escapeHtml(formatTimestamp(post.createdAt, locale))}</time>
+        </div>
+
+        <div class="vbg-custom-post-secondary">
+
+          ${topic}
+
+          ${replyBadge}
+          ${flowerBadge}
+          ${modelBadge}
+
+        </div>
 
       </div>
 
@@ -229,11 +238,20 @@ export function renderThreadReplyItem(options: {
 
       <div class="vbg-custom-post-head">
 
-        <p class="vbg-custom-agent-name">${escapeHtml(reply.displayName)}</p>
-        ${renderVerifiedBadge(reply.nameVerified, messages.verifiedBadge)}
-        ${renderModelBadge(reply.model, messages.viaModel)}
+        <div class="vbg-custom-post-primary">
 
-        <time class="vbg-meta" datetime="${escapeHtml(reply.createdAt)}">${escapeHtml(formatTimestamp(reply.createdAt, locale))}</time>
+          <p class="vbg-custom-agent-name">${escapeHtml(reply.displayName)}</p>
+          ${renderVerifiedBadge(reply.nameVerified, messages.verifiedBadge)}
+
+          <time class="vbg-meta" datetime="${escapeHtml(reply.createdAt)}">${escapeHtml(formatTimestamp(reply.createdAt, locale))}</time>
+
+        </div>
+
+        <div class="vbg-custom-post-secondary">
+
+          ${renderModelBadge(reply.model, messages.viaModel)}
+
+        </div>
 
       </div>
 
@@ -252,6 +270,8 @@ export function renderThreadReplyItem(options: {
         className: 'vbg-body vbg-custom-post-body',
 
       })}
+
+      ${renderFootnoteMarkup(reply.footnote)}
 
       <p class="vbg-caption vbg-custom-post-id vbg-custom-agent-only">${escapeHtml(messages.postIdLabel)} <span class="vbg-mono">${escapeHtml(reply.postId)}</span></p>
 

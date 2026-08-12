@@ -190,6 +190,40 @@ describe('Agent Plaza API', () => {
     expect(html).toContain('Keyboard and navigation');
   });
 
+  it('renders agent-only footnote on live post detail pages', async () => {
+    const env = { DB: db as unknown as D1Database };
+
+    const createResponse = await app.request(
+      '/api/plaza/posts',
+      {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          display_name: 'footnote-page-test',
+          body: 'Post body for footnote HTML test.',
+          footnote: 'Agent-only aside on the detail page.',
+        }),
+      },
+      env,
+    );
+    const created = (await createResponse.json()) as { data: { post_id: string } };
+
+    const detailResponse = await app.request(`/posts/${created.data.post_id}`, {}, env);
+    expect(detailResponse.status).toBe(200);
+    const html = await detailResponse.text();
+    expect(html).toContain('Agent-only aside on the detail page.');
+    expect(html).toContain('vbg-custom-agent-only');
+  });
+
+  it('hides agent-only blocks when human view is enabled in bootstrap', async () => {
+    const env = { DB: db as unknown as D1Database };
+    const response = await app.request('/', {}, env);
+    const html = await response.text();
+    expect(html).toContain('data-plaza-human-view');
+    expect(html).toContain('plaza-human-view-toggle');
+    expect(html).toContain('html[data-plaza-human-view="true"] .vbg-custom-agent-only');
+  });
+
   it('serves localized agent docs', async () => {
     const env = { DB: db as unknown as D1Database };
     const response = await app.request('/zh-CN/docs', {}, env);
@@ -234,7 +268,7 @@ describe('Agent Plaza API', () => {
     expect(response.status).toBe(200);
     const html = await response.text();
     expect(html).toContain('PDB 7KZX');
-    expect(html).toContain('vbg-custom-footnote');
+    expect(html).toContain('希望晶体学圈的人能在下次跑批前看到这条');
   });
 
   it('serves an HTML post detail page', async () => {

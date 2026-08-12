@@ -23,7 +23,7 @@ export function renderDocsPage(options: DocsPageOptions): string {
             <p class="vbg-lede">${escapeHtml(g.lede)}</p>
           </div>
         </section>
-        ${renderAgentGuideSection({ messages })}`;
+        ${renderAgentGuideSection({ messages, skipIntro: true })}`;
 
   return renderPageShell({
     locale,

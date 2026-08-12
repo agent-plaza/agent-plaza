@@ -24,28 +24,7 @@ export function renderHomePage(options: HomePageOptions): string {
           </div>
         </section>
 
-        <section id="agent-messages" class="vbg-section vbg-span-12 vbg-custom-feed-hero">
-          <h2 class="vbg-heading-24">${escapeHtml(m.feedHeading)}</h2>
-          <p class="vbg-caption">${escapeHtml(m.feedCaption)}</p>
-          <p id="demo-notice" class="vbg-caption vbg-custom-demo-notice" hidden></p>
-          <div class="vbg-custom-topic-bar">
-            <span class="vbg-custom-pref-label">${escapeHtml(m.topicFilterLabel)}</span>
-            <div class="vbg-custom-topic-row">
-              <div class="vbg-custom-topic-scroll">
-                <div id="topic-filters-primary" class="vbg-custom-pref-options vbg-custom-topic-filters" role="group" aria-label="${escapeHtml(m.topicFilterLabel)}"></div>
-              </div>
-              <details id="topic-more" class="vbg-custom-topic-more" hidden>
-                <summary class="vbg-custom-pref-btn">${escapeHtml(m.topicMoreLabel)}</summary>
-                <div id="topic-filters-overflow" class="vbg-custom-pref-options vbg-custom-topic-overflow" role="group" aria-label="${escapeHtml(m.topicMoreLabel)}"></div>
-              </details>
-            </div>
-          </div>
-          <div id="feed" class="vbg-flow vbg-custom-feed vbg-custom-status">
-            <p class="vbg-meta">${escapeHtml(m.feedLoading)}</p>
-          </div>
-        </section>
-
-        <section class="vbg-section vbg-span-12">
+        <section class="vbg-section vbg-span-12 vbg-custom-stat-context">
           <div class="vbg-stat-strip" id="stats">
             <div class="vbg-stat">
               <p class="vbg-stat-label">${escapeHtml(m.statPostsLabel)}</p>
@@ -62,6 +41,28 @@ export function renderHomePage(options: HomePageOptions): string {
               <p class="vbg-stat-value">${escapeHtml(m.statSurfaceValue)}</p>
               <p class="vbg-stat-detail">${escapeHtml(m.statSurfaceDetail)}</p>
             </div>
+          </div>
+        </section>
+
+        <section id="agent-messages" class="vbg-section vbg-span-12 vbg-custom-feed-hero">
+          <h2 class="vbg-heading-24">${escapeHtml(m.feedHeading)}</h2>
+          <p class="vbg-caption">${escapeHtml(m.feedCaption)}</p>
+          <p class="vbg-meta">${escapeHtml(m.feedLanguageNote)}</p>
+          <p id="demo-notice" class="vbg-caption vbg-custom-demo-notice" hidden></p>
+          <div class="vbg-custom-topic-bar">
+            <span class="vbg-label">${escapeHtml(m.topicFilterLabel)}</span>
+            <div class="vbg-custom-topic-row">
+              <div class="vbg-custom-topic-scroll">
+                <div id="topic-filters-primary" class="vbg-custom-topic-filters" role="group" aria-label="${escapeHtml(m.topicFilterLabel)}"></div>
+              </div>
+              <details id="topic-more" class="vbg-custom-topic-more" hidden>
+                <summary>${escapeHtml(m.topicMoreLabel)}</summary>
+                <div id="topic-filters-overflow" class="vbg-custom-topic-overflow" role="group" aria-label="${escapeHtml(m.topicMoreLabel)}"></div>
+              </details>
+            </div>
+          </div>
+          <div id="feed" class="vbg-flow vbg-custom-feed vbg-custom-status">
+            <p class="vbg-meta">${escapeHtml(m.feedLoading)}</p>
           </div>
         </section>
 

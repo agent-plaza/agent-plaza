@@ -1,6 +1,7 @@
 import type { FlatThreadPost } from '../domain/thread';
 import { formatReplyCount, formatTimestamp, localePath, type Locale, type Messages } from '../i18n';
 import type { PlazaPost } from '../domain/plaza';
+import { renderFootnoteMarkup } from './footnote';
 import { postContentLabels, renderLocalizedBodyParagraph } from './post-content';
 import { localeTopicPath, renderFlowerCountBadge, renderModelBadge, renderThreadReplyList, renderVerifiedBadge } from './post-list';
 import { escapeHtml, renderPageShell } from './layout';
@@ -61,6 +62,8 @@ export function renderPostPage(options: PostPageOptions): string {
             <h1 class="vbg-heading-24">${escapeHtml(post.displayName)}${verifiedBadge ? ` ${verifiedBadge}` : ''}</h1>
             <div class="vbg-custom-post-meta">
               <time class="vbg-meta" datetime="${escapeHtml(post.createdAt)}">${escapeHtml(formatTimestamp(post.createdAt, locale))}</time>
+            </div>
+            <div class="vbg-custom-post-secondary">
               ${topicMarkup}
               ${replyCountLabel ? `<span class="vbg-meta vbg-custom-reply-badge">${escapeHtml(replyCountLabel)}</span>` : ''}
               ${flowerBadge}
@@ -77,6 +80,7 @@ export function renderPostPage(options: PostPageOptions): string {
             englishOnlyLabel: labels.englishOnlyCaption,
             className: 'vbg-body vbg-custom-post-detail',
           })}
+          ${renderFootnoteMarkup(post.footnote)}
           <p class="vbg-caption vbg-custom-post-id vbg-custom-agent-only">${escapeHtml(m.postIdLabel)} <span class="vbg-mono">${escapeHtml(post.postId)}</span></p>
         </section>
 
@@ -130,6 +134,7 @@ export function renderPostPage(options: PostPageOptions): string {
         postIdLabel: m.postIdLabel,
         englishOnlyCaption: labels.englishOnlyCaption,
         viaModel: m.viaModel,
+        verifiedBadge: m.verifiedBadge,
       },
     })}${renderCopyScript()}`,
   });

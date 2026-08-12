@@ -206,14 +206,14 @@ export function renderFeedScript(locale: Locale, messages: Messages, docsPath: s
     var more = document.getElementById('topic-more');
     if (!primary || !overflow || !more) return;
 
-    var allButton = '<a class="vbg-custom-pref-btn' + (activeTopic ? '' : ' is-active') + '" href="' + escapeHtml(topicHref(null)) + '" aria-current="' + (activeTopic ? 'false' : 'true') + '">' + escapeHtml(CONFIG.messages.topicFilterAll) + '</a>';
+    var allButton = '<a class="vbg-custom-topic-chip' + (activeTopic ? '' : ' is-active') + '" href="' + escapeHtml(topicHref(null)) + '" aria-current="' + (activeTopic ? 'false' : 'true') + '">' + escapeHtml(CONFIG.messages.topicFilterAll) + '</a>';
 
     var visible = topics.slice(0, CONFIG.visibleTopicLimit);
     var hidden = topics.slice(CONFIG.visibleTopicLimit);
 
     var visibleButtons = visible.map(function (topic) {
       var active = activeTopic === topic.topic;
-      return '<a class="vbg-custom-pref-btn vbg-custom-topic-btn' + (active ? ' is-active' : '') + '" href="' + escapeHtml(topicHref(topic.topic)) + '" aria-current="' + (active ? 'true' : 'false') + '">#' + escapeHtml(topic.topic) + '</a>';
+      return '<a class="vbg-custom-topic-chip' + (active ? ' is-active' : '') + '" href="' + escapeHtml(topicHref(topic.topic)) + '" aria-current="' + (active ? 'true' : 'false') + '">#' + escapeHtml(topic.topic) + '</a>';
     });
 
     primary.innerHTML = allButton + visibleButtons.join('');
@@ -227,7 +227,7 @@ export function renderFeedScript(locale: Locale, messages: Messages, docsPath: s
     more.hidden = false;
     overflow.innerHTML = hidden.map(function (topic) {
       var active = activeTopic === topic.topic;
-      return '<a class="vbg-custom-pref-btn vbg-custom-topic-btn' + (active ? ' is-active' : '') + '" href="' + escapeHtml(topicHref(topic.topic)) + '" aria-current="' + (active ? 'true' : 'false') + '">#' + escapeHtml(topic.topic) + ' <span class="vbg-meta">(' + topic.post_count + ')</span></a>';
+      return '<a class="vbg-custom-topic-chip' + (active ? ' is-active' : '') + '" href="' + escapeHtml(topicHref(topic.topic)) + '" aria-current="' + (active ? 'true' : 'false') + '">#' + escapeHtml(topic.topic) + ' <span class="vbg-meta">(' + topic.post_count + ')</span></a>';
     }).join('');
   }
 
@@ -254,18 +254,22 @@ export function renderFeedScript(locale: Locale, messages: Messages, docsPath: s
     return (
       '<article class="vbg-custom-post">' +
         '<div class="vbg-custom-post-head">' +
-          '<p class="vbg-custom-agent-name">' +
-            '<a class="vbg-custom-post-link" href="' + postUrl + '">' + escapeHtml(item.display_name) + '</a>' +
-            renderVerifiedBadge(item) +
-          '</p>' +
-          topic +
-          replyBadge +
-          flowerBadge +
-          modelBadge +
-          renderContentLanguageBadge(item) +
-          '<time class="vbg-meta" datetime="' + escapeHtml(item.created_at) + '">' +
-            escapeHtml(formatTimestamp(item.created_at)) +
-          '</time>' +
+          '<div class="vbg-custom-post-primary">' +
+            '<p class="vbg-custom-agent-name">' +
+              '<a class="vbg-custom-post-link" href="' + postUrl + '">' + escapeHtml(item.display_name) + '</a>' +
+              renderVerifiedBadge(item) +
+            '</p>' +
+            '<time class="vbg-meta" datetime="' + escapeHtml(item.created_at) + '">' +
+              escapeHtml(formatTimestamp(item.created_at)) +
+            '</time>' +
+          '</div>' +
+          '<div class="vbg-custom-post-secondary">' +
+            topic +
+            replyBadge +
+            flowerBadge +
+            modelBadge +
+            renderContentLanguageBadge(item) +
+          '</div>' +
         '</div>' +
         '<p class="vbg-body vbg-custom-post-body">' +
           '<a class="vbg-custom-post-link" href="' + postUrl + '">' + escapeHtml(resolveDisplayBody(item)) + renderEnglishOnlyCaption(item) + '</a>' +

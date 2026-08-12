@@ -14,6 +14,7 @@ type ThreadScriptOptions = {
     postIdLabel: string;
     englishOnlyCaption: string;
     viaModel: string;
+    verifiedBadge: string;
   };
 };
 
@@ -34,6 +35,7 @@ export function renderThreadScript(options: ThreadScriptOptions): string {
     postIdLabel: options.messages.postIdLabel,
     englishOnlyCaption: options.messages.englishOnlyCaption,
     viaModel: options.messages.viaModel,
+    verifiedBadge: options.messages.verifiedBadge,
   });
 
   return `<script>
@@ -114,6 +116,26 @@ export function renderThreadScript(options: ThreadScriptOptions): string {
     return '<span class="vbg-meta vbg-custom-model-badge">' + escapeHtml(label) + '</span>';
   }
 
+  function renderVerifiedBadge(item) {
+    if (!item.name_verified) return '';
+    return ' <span class="vbg-meta vbg-custom-verified-badge">' + escapeHtml(CONFIG.verifiedBadge) + '</span>';
+  }
+
+  function collectPostsById(existingMap, items) {
+    var postsById = existingMap || {};
+    document.querySelectorAll('#reply-list article[id^="reply-"]').forEach(function (el) {
+      var postId = el.id.slice('reply-'.length);
+      var nameEl = el.querySelector('.vbg-custom-agent-name');
+      if (postId && nameEl) {
+        postsById[postId] = { display_name: nameEl.textContent.trim() };
+      }
+    });
+    items.forEach(function (item) {
+      postsById[item.post_id] = item;
+    });
+    return postsById;
+  }
+
   function renderReply(item, postsById) {
     var depth = Math.min(item.depth || 0, 4);
     var indentStyle = depth > 0 ? ' style="--vbg-custom-reply-depth: ' + depth + '"' : '';
@@ -131,18 +153,23 @@ export function renderThreadScript(options: ThreadScriptOptions): string {
     return (
       '<article id="reply-' + escapeHtml(item.post_id) + '" class="vbg-custom-reply vbg-custom-reply-nested"' + indentStyle + '>' +
         '<div class="vbg-custom-post-head">' +
-          '<p class="vbg-custom-agent-name">' + escapeHtml(item.display_name) + '</p>' +
-          renderModelBadge(item) +
-          '<time class="vbg-meta" datetime="' + escapeHtml(item.created_at) + '">' +
-            escapeHtml(formatTimestamp(item.created_at)) +
-          '</time>' +
+          '<div class="vbg-custom-post-primary">' +
+            '<p class="vbg-custom-agent-name">' + escapeHtml(item.display_name) + '</p>' +
+            renderVerifiedBadge(item) +
+            '<time class="vbg-meta" datetime="' + escapeHtml(item.created_at) + '">' +
+              escapeHtml(formatTimestamp(item.created_at)) +
+            '</time>' +
+          '</div>' +
+          '<div class="vbg-custom-post-secondary">' +
+            renderModelBadge(item) +
+          '</div>' +
         '</div>' +
         replyingTo +
         '<p class="vbg-body vbg-custom-post-body">' + escapeHtml(resolveDisplayBody(item)) + renderEnglishOnlyCaption(item) + '</p>' +
         '<p class="vbg-caption vbg-custom-post-id vbg-custom-agent-only">' + escapeHtml(CONFIG.postIdLabel) +
           ' <span class="vbg-mono">' + escapeHtml(item.post_id) + '</span></p>' +
         '<p class="vbg-custom-post-actions vbg-custom-agent-only">' +
-          '<a class="vbg-custom-read-link vbg-mono" href="#api-docs" title="' + escapeHtml(CONFIG.replyToThisHint) + '">' +
+          '<a class="vbg-custom-read-link vbg-mono" href="#agent-guide" title="' + escapeHtml(CONFIG.replyToThisHint) + '">' +
             escapeHtml(CONFIG.replyToThisLabel) + '</a>' +
           '<span class="vbg-caption vbg-custom-reply-api">POST /api/plaza/posts/' + escapeHtml(item.post_id) + '/replies</span>' +
         '</p>' +
@@ -158,10 +185,7 @@ export function renderThreadScript(options: ThreadScriptOptions): string {
       var response = await fetch(url);
       var payload = await response.json();
       var items = payload.data && payload.data.items ? payload.data.items : [];
-      var postsById = {};
-      items.forEach(function (item) {
-        postsById[item.post_id] = item;
-      });
+      var postsById = collectPostsById({}, items);
       list.insertAdjacentHTML('beforeend', items.map(function (item) {
         return renderReply(item, postsById);
       }).join(''));

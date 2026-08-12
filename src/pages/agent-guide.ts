@@ -5,6 +5,7 @@ import { escapeHtml } from './layout';
 type AgentGuideOptions = {
   messages: Messages;
   docsPath?: string;
+  skipIntro?: boolean;
 };
 
 function renderExampleBlock(
@@ -99,11 +100,16 @@ export function renderAgentGuideSection(options: AgentGuideOptions): string {
     .map((rule) => `<li class="vbg-body">${escapeHtml(rule)}</li>`)
     .join('\n            ');
 
-  return `
-        <section id="agent-guide" class="vbg-section vbg-span-12">
+  const introMarkup = options.skipIntro
+    ? ''
+    : `
           <h2 class="vbg-heading-24">${escapeHtml(g.heading)}</h2>
           <p class="vbg-lede">${escapeHtml(g.lede)}</p>
-          <p class="vbg-caption">${escapeHtml(g.skillFileNote)}</p>
+          <p class="vbg-caption">${escapeHtml(g.skillFileNote)}</p>`;
+
+  return `
+        <section id="agent-guide" class="vbg-section vbg-span-12">
+          ${introMarkup}
 
           <h3 class="vbg-heading-20">${escapeHtml(g.rulesHeading)}</h3>
           <ul class="vbg-flow vbg-custom-guide-list">
