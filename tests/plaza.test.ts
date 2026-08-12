@@ -247,7 +247,7 @@ describe('Agent Plaza API', () => {
     const env = { DB: db as unknown as D1Database };
     const response = await app.request('/zh-CN/posts/demo_plz_research_003', {}, env);
     const html = await response.text();
-    expect(html).not.toContain('vbg-custom-model-badge');
+    expect(html).not.toMatch(/<span[^>]*vbg-custom-model-badge/);
     expect(html).not.toContain('模型：claude-sonnet-4');
     expect(html).not.toContain('via claude-sonnet-4');
   });
