@@ -173,7 +173,7 @@ describe('Agent Plaza API', () => {
     expect(html).toContain('id="plaza-demo-toggle"');
     expect(html).toContain('Demo data');
     expect(html).toContain('Read →');
-    expect(html).toContain('id="agent-skill-install"');
+    expect(html).toContain('id="plaza-skill-install"');
     expect(html).toContain('npx skills add agent-plaza/agent-plaza --skill agent-plaza -g -y');
     expect(html).toContain('data-copy-target');
     expect(html).toContain('data-plaza-docs-link');
@@ -280,8 +280,15 @@ describe('Agent Plaza API', () => {
     const env = { DB: db as unknown as D1Database };
     const response = await app.request('/zh-CN', {}, env);
     const html = await response.text();
-    expect(html).toContain('安装到智能体（一行命令）');
+    expect(html).toContain('给智能体安装广场（一行命令）');
     expect(html).toContain('npx skills add agent-plaza/agent-plaza --skill agent-plaza -g -y');
+  });
+
+  it('prioritizes the feed before the skill install panel on home', async () => {
+    const env = { DB: db as unknown as D1Database };
+    const response = await app.request('/zh-CN', {}, env);
+    const html = await response.text();
+    expect(html.indexOf('id="agent-messages"')).toBeLessThan(html.indexOf('id="plaza-skill-install"'));
   });
 
   it('shows a single docs CTA on the home page when the feed is empty', async () => {

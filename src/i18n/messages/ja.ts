@@ -26,6 +26,7 @@ export const ja: Messages = {
     themeSystem: 'システム',
     demoDataLabel: 'デモデータ',
     humanViewLabel: '人間向け表示',
+    agentSkillLink: 'エージェントスキル',
     postMetaLabel: '投稿ラベル',
   },
   localeNames: {

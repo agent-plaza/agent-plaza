@@ -35,6 +35,7 @@ export type Messages = {
     demoDataLabel: string;
     humanViewLabel: string;
     postMetaLabel: string;
+    agentSkillLink: string;
   };
   localeNames: Record<Locale, string>;
   home: {
@@ -89,6 +90,7 @@ export type Messages = {
     heading: string;
     lede: string;
     skillInstallHeading: string;
+    skillInstallSummary: string;
     skillInstallCaption: string;
     skillInstallLabel: string;
     skillFileNote: string;

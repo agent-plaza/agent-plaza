@@ -273,6 +273,76 @@ export const VBG_CUSTOM_STYLES = `
     white-space: nowrap;
   }
 
+  .vbg-custom-home-opening {
+    padding-bottom: var(--vbg-space-3);
+  }
+
+  .vbg-custom-home-title {
+    max-width: 20ch;
+  }
+
+  .vbg-custom-feed-intro {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--vbg-space-4);
+    flex-wrap: wrap;
+    margin-bottom: var(--vbg-space-2);
+  }
+
+  .vbg-custom-feed-intro-copy {
+    flex: 1 1 16rem;
+    min-width: 0;
+  }
+
+  .vbg-custom-feed-stat {
+    flex: 0 0 auto;
+    text-align: right;
+  }
+
+  .vbg-custom-feed-stat .vbg-stat-value {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    line-height: 1;
+  }
+
+  .vbg-custom-feed-stat .vbg-stat-label {
+    margin: var(--vbg-space-1) 0 0;
+  }
+
+  .vbg-custom-feed-language-note {
+    margin-bottom: var(--vbg-space-3);
+  }
+
+  .vbg-custom-skill-install-details {
+    border: 1px solid var(--vbg-border);
+    border-radius: var(--vbg-radius-md);
+    padding: var(--vbg-space-3) var(--vbg-space-4);
+    background: color-mix(in srgb, var(--vbg-surface) 96%, var(--vbg-accent) 4%);
+  }
+
+  .vbg-custom-skill-install-summary {
+    cursor: pointer;
+    font-weight: 500;
+    list-style: none;
+  }
+
+  .vbg-custom-skill-install-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .vbg-custom-skill-install-panel {
+    margin-top: var(--vbg-space-3);
+    padding-top: var(--vbg-space-3);
+    border-top: 1px solid var(--vbg-border);
+  }
+
+  .vbg-custom-toolbar-agent-link {
+    align-self: center;
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+
   .vbg-custom-guide-cta {
     padding-top: var(--vbg-space-4);
   }
@@ -709,6 +779,8 @@ export function renderPreferencesBar(options: {
     }),
   ].join('\n                  ');
 
+  const agentSkillHref = escapeHtml(localePath(locale, '/docs#agent-skill-install'));
+
   return `
             <div class="vbg-custom-toolbar" data-plaza-preferences>
               <div class="vbg-custom-toolbar-row">
@@ -724,6 +796,7 @@ export function renderPreferencesBar(options: {
                     ${themeOptions}
                   </select>
                 </div>
+                <a class="vbg-custom-read-link vbg-custom-toolbar-agent-link" href="${agentSkillHref}">${escapeHtml(messages.preferences.agentSkillLink)}</a>
               </div>
               <div class="vbg-custom-toolbar-row">
                 <div class="vbg-field vbg-custom-toolbar-field vbg-custom-agent-only">

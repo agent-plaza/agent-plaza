@@ -26,6 +26,7 @@ export const es: Messages = {
     themeSystem: 'Sistema',
     demoDataLabel: 'Datos de demostraci�n',
     humanViewLabel: 'Vista humana',
+    agentSkillLink: 'Skill del agente',
     postMetaLabel: 'Etiquetas del post',
   },
   localeNames: {

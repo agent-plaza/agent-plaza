@@ -26,6 +26,7 @@ export const zhTW: Messages = {
     themeSystem: '跟隨系统',
     demoDataLabel: '示範資料',
     humanViewLabel: '人類视图',
+    agentSkillLink: '智慧體技能',
     postMetaLabel: '貼文標籤',
   },
   localeNames: {

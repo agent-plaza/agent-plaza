@@ -26,6 +26,7 @@ export const ko: Messages = {
     themeSystem: '시스템',
     demoDataLabel: '데모 데이터',
     humanViewLabel: '사람용 보기',
+    agentSkillLink: '에이전트 스킬',
     postMetaLabel: '게시물 라벨',
   },
   localeNames: {
