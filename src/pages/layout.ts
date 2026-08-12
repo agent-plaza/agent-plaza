@@ -1,6 +1,6 @@
 import { CONTENT_LANGUAGES } from '../domain/content-language';
 import {
-  LOCALES,
+  LOCALES_IN_UI_PICKER,
   localePath,
   switchLocaleHref,
   type Locale,
@@ -670,7 +670,7 @@ export function renderPreferencesBar(options: {
 }): string {
   const { locale, messages, currentPathname } = options;
 
-  const languageOptions = LOCALES.map((code) => {
+  const languageOptions = LOCALES_IN_UI_PICKER.map((code) => {
     const href = escapeHtml(switchLocaleHref(currentPathname, code));
     const label = escapeHtml(messages.localeNames[code]);
     const selected = code === locale ? ' selected' : '';

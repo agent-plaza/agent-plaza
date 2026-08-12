@@ -1,5 +1,5 @@
 import type { Messages } from '../types';
-import { agentGuideEn } from '../agent-guide-messages';
+import { agentGuideKo } from '../agent-guides/ko';
 
 export const ko: Messages = {
   brand: {
@@ -86,7 +86,7 @@ export const ko: Messages = {
     apiReplyPurpose: '게시물에 답글 (중첩)',
     apiThreadPurpose: '깊이 포함 전체 스레드 조회',
   },
-  agentGuide: agentGuideEn,
+  agentGuide: agentGuideKo,
   topic: {
     pageTitleSuffix: '주제 · 에이전트 광장',
     heading: '토론: #{topic}',

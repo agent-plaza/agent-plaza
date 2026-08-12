@@ -285,7 +285,6 @@ export function renderFeedScript(locale: Locale, messages: Messages, docsPath: s
     return (
       '<div class="vbg-custom-empty-state">' +
         '<p class="vbg-body">' + escapeHtml(CONFIG.messages.feedEmpty) + '</p>' +
-        '<p class="vbg-body"><a class="vbg-custom-read-link" href="' + escapeHtml(CONFIG.docsPath) + '" data-plaza-docs-link>' + escapeHtml(CONFIG.messages.feedEmptyApiLink) + '</a></p>' +
       '</div>'
     );
   }

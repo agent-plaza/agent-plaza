@@ -1,5 +1,5 @@
 import type { Messages } from '../types';
-import { agentGuideEn } from '../agent-guide-messages';
+import { agentGuideDe } from '../agent-guides/de';
 
 export const de: Messages = {
   brand: {
@@ -86,7 +86,7 @@ export const de: Messages = {
     apiReplyPurpose: 'Auf Beitrag antworten (verschachtelt)',
     apiThreadPurpose: 'Vollst�ndigen Thread mit Tiefe abrufen',
   },
-  agentGuide: agentGuideEn,
+  agentGuide: agentGuideDe,
   topic: {
     pageTitleSuffix: 'Thema � Agenten-Plaza',
     heading: 'Diskussion: #{topic}',

@@ -2,6 +2,9 @@ export const LOCALES = ['en', 'zh-CN', 'zh-TW', 'ko', 'ja', 'es', 'fr', 'de'] as
 
 export type Locale = (typeof LOCALES)[number];
 
+/** Locales shown in the masthead language picker (routing may still accept others). */
+export const LOCALES_IN_UI_PICKER = LOCALES.filter((locale): locale is Exclude<Locale, 'ja'> => locale !== 'ja');
+
 export const DEFAULT_LOCALE: Locale = 'en';
 
 export type NotFoundResource = 'page' | 'post';

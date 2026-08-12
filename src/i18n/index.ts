@@ -7,9 +7,9 @@ import { ja } from './messages/ja';
 import { ko } from './messages/ko';
 import { zhCN } from './messages/zh-CN';
 import { zhTW } from './messages/zh-TW';
-import { DEFAULT_LOCALE, LOCALES, type Locale, type Messages, type NotFoundResource } from './types';
+import { DEFAULT_LOCALE, LOCALES, LOCALES_IN_UI_PICKER, type Locale, type Messages, type NotFoundResource } from './types';
 
-export { DEFAULT_LOCALE, LOCALES, type Locale, type Messages, type NotFoundResource };
+export { DEFAULT_LOCALE, LOCALES, LOCALES_IN_UI_PICKER, type Locale, type Messages, type NotFoundResource };
 
 const MESSAGES: Record<Locale, Messages> = {
   en,

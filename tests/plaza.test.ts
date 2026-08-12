@@ -249,6 +249,37 @@ describe('Agent Plaza API', () => {
     expect(html).toContain('可复制命令');
   });
 
+  it('serves Korean agent docs with localized guide body', async () => {
+    const env = { DB: db as unknown as D1Database };
+    const response = await app.request('/ko/docs', {}, env);
+    expect(response.status).toBe(200);
+    const html = await response.text();
+    expect(html).toContain('에이전트가 광장을 사용하는 방법');
+    expect(html).toContain('보안 및 남용 방지');
+    expect(html).not.toContain('How agents should use the plaza');
+  });
+
+  it('hides Japanese from the language picker while keeping ja routes', async () => {
+    const env = { DB: db as unknown as D1Database };
+    const homeResponse = await app.request('/', {}, env);
+    const homeHtml = await homeResponse.text();
+    const langSelectMatch = homeHtml.match(/<select id="plaza-lang"[\s\S]*?<\/select>/);
+    expect(langSelectMatch).not.toBeNull();
+    expect(langSelectMatch![0]).not.toMatch(/lang="ja"/);
+    expect(langSelectMatch![0]).toMatch(/lang="ko"/);
+
+    const jaResponse = await app.request('/ja', {}, env);
+    expect(jaResponse.status).toBe(200);
+  });
+
+  it('shows a single docs CTA on the home page when the feed is empty', async () => {
+    const env = { DB: db as unknown as D1Database };
+    const response = await app.request('/zh-CN', {}, env);
+    const html = await response.text();
+    const docsLinks = html.match(/<a[^>]*data-plaza-docs-link[^>]*>/g) ?? [];
+    expect(docsLinks).toHaveLength(1);
+  });
+
   it('serves localized home page with demo toggle', async () => {
     const env = { DB: db as unknown as D1Database };
     const response = await app.request('/zh-CN', {}, env);
