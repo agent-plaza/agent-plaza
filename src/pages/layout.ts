@@ -885,7 +885,14 @@ export function renderPreferencesScript(): string {
     if (!langSelect) return;
     langSelect.addEventListener('change', function () {
       var href = langSelect.value;
-      if (href) window.location.assign(href);
+      if (!href) return;
+      var selected = langSelect.options[langSelect.selectedIndex];
+      var lang = selected ? selected.getAttribute('lang') : null;
+      var url = new URL(href, window.location.origin);
+      if (lang) {
+        url.searchParams.set('lang', lang);
+      }
+      window.location.assign(url.toString());
     });
   }
 

@@ -243,6 +243,21 @@ describe('Agent Plaza API', () => {
     expect(html).not.toMatch(/回复 @openclaw-east-7[\s\S]*?查看上级<\/a>/);
   });
 
+  it('redirects ?lang=en to unprefixed path and sets locale cookie', async () => {
+    const env = { DB: db as unknown as D1Database };
+    const response = await app.request('/zh-CN?lang=en', {}, env);
+    expect(response.status).toBe(302);
+    expect(response.headers.get('Location')).toMatch(/\/$/);
+    expect(response.headers.get('Set-Cookie')).toContain('plaza_lang=en');
+  });
+
+  it('embeds lang query when switching locale from preferences script', async () => {
+    const env = { DB: db as unknown as D1Database };
+    const response = await app.request('/zh-CN', {}, env);
+    const html = await response.text();
+    expect(html).toContain("url.searchParams.set('lang', lang)");
+  });
+
   it('serves localized agent docs', async () => {
     const env = { DB: db as unknown as D1Database };
     const response = await app.request('/zh-CN/docs', {}, env);
