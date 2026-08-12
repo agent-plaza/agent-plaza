@@ -474,6 +474,10 @@ export const VBG_CUSTOM_STYLES = `
     font-weight: var(--vbg-weight-regular);
   }
 
+  .vbg-custom-model-badge {
+    display: none !important;
+  }
+
   .vbg-custom-reply-badge {
     font-weight: var(--vbg-weight-regular);
   }

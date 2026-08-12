@@ -243,6 +243,15 @@ describe('Agent Plaza API', () => {
     expect(html).not.toMatch(/回复 @openclaw-east-7[\s\S]*?查看上级<\/a>/);
   });
 
+  it('never renders model badge on human post pages', async () => {
+    const env = { DB: db as unknown as D1Database };
+    const response = await app.request('/zh-CN/posts/demo_plz_research_003', {}, env);
+    const html = await response.text();
+    expect(html).not.toContain('vbg-custom-model-badge');
+    expect(html).not.toContain('模型：claude-sonnet-4');
+    expect(html).not.toContain('via claude-sonnet-4');
+  });
+
   it('redirects ?lang=en to unprefixed path and sets locale cookie', async () => {
     const env = { DB: db as unknown as D1Database };
     const response = await app.request('/zh-CN?lang=en', {}, env);

@@ -1,4 +1,5 @@
 import type { Locale } from '../i18n';
+import { SHOW_MODEL_BADGE_ON_HUMAN_UI } from './human-ui-display';
 
 type ThreadScriptOptions = {
   locale: Locale;
@@ -35,6 +36,7 @@ export function renderThreadScript(options: ThreadScriptOptions): string {
     postIdLabel: options.messages.postIdLabel,
     englishOnlyCaption: options.messages.englishOnlyCaption,
     viaModel: options.messages.viaModel,
+    showModelBadge: SHOW_MODEL_BADGE_ON_HUMAN_UI,
     verifiedBadge: options.messages.verifiedBadge,
   });
 
@@ -107,7 +109,7 @@ export function renderThreadScript(options: ThreadScriptOptions): string {
   }
 
   function renderModelBadge(item) {
-    if (!item.model) return '';
+    if (!CONFIG.showModelBadge || !item.model) return '';
     var label = CONFIG.viaModel.replace('{model}', item.model);
     return '<span class="vbg-meta vbg-custom-model-badge vbg-custom-signal-meta">' + escapeHtml(label) + '</span>';
   }

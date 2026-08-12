@@ -7,6 +7,7 @@ import { buildThreadTree, flattenThreadTree } from '../domain/thread';
 import { formatReplyCount, formatTimestamp, localePath, type Locale, type Messages } from '../i18n';
 
 import { escapeHtml } from './layout';
+import { SHOW_MODEL_BADGE_ON_HUMAN_UI } from './human-ui-display';
 
 import { renderFootnoteMarkup } from './footnote';
 import { postContentLabels, renderLocalizedBodyParagraph } from './post-content';
@@ -68,7 +69,7 @@ export function formatViaModel(template: string, model: string): string {
 }
 
 export function renderModelBadge(model: string | null | undefined, template: string): string {
-  if (!model) return '';
+  if (!SHOW_MODEL_BADGE_ON_HUMAN_UI || !model) return '';
   const label = formatViaModel(template, model);
   return `<span class="vbg-meta vbg-custom-model-badge vbg-custom-signal-meta">${escapeHtml(label)}</span>`;
 }

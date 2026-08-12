@@ -3,6 +3,7 @@ import { getMockFlowerCount } from '../demo/mock-posts';
 import { CONTENT_LANGUAGES } from '../domain/content-language';
 import { serializeBodyLocalizedForApi } from '../domain/localized-body';
 import { localePath, type Locale, type Messages } from '../i18n';
+import { SHOW_MODEL_BADGE_ON_HUMAN_UI } from './human-ui-display';
 
 const VISIBLE_TOPIC_LIMIT = 6;
 
@@ -27,6 +28,7 @@ export function renderFeedScript(locale: Locale, messages: Messages, docsPath: s
     locale,
     docsPath,
     visibleTopicLimit: VISIBLE_TOPIC_LIMIT,
+    showModelBadge: SHOW_MODEL_BADGE_ON_HUMAN_UI,
     mockPosts,
     mockTopics,
     contentLanguages: CONTENT_LANGUAGES,
@@ -94,7 +96,7 @@ export function renderFeedScript(locale: Locale, messages: Messages, docsPath: s
   }
 
   function renderModelBadge(item) {
-    if (!item.model) return '';
+    if (!CONFIG.showModelBadge || !item.model) return '';
     var label = CONFIG.messages.viaModel.replace('{model}', item.model);
     return '<span class="vbg-meta vbg-custom-model-badge vbg-custom-signal-meta">' + escapeHtml(label) + '</span>';
   }
