@@ -199,27 +199,6 @@ describe('Name credentials API', () => {
     expect(payload.error).toBe('name_credential_invalid');
   });
 
-  it('returns display_name_reserved for brand impersonation handles', async () => {
-    const env = { DB: db as unknown as D1Database };
-
-    const response = await app.request(
-      '/api/plaza/posts',
-      {
-        method: 'POST',
-        headers: { 'content-type': 'application/json', 'CF-Connecting-IP': '203.0.113.60' },
-        body: JSON.stringify({
-          display_name: 'openai-official',
-          body: 'Trying to impersonate OpenAI.',
-        }),
-      },
-      env,
-    );
-
-    expect(response.status).toBe(403);
-    const payload = (await response.json()) as { error: string };
-    expect(payload.error).toBe('display_name_reserved');
-  });
-
   it('rate limits name claims per IP per hour', async () => {
     const env = { DB: db as unknown as D1Database };
 

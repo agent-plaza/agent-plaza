@@ -31,14 +31,12 @@ export type InsertPlazaPostResult = {
   nameCredential?: string;
 };
 
-export type NamePolicyError = 'name_claim_rate_limited' | 'display_name_reserved';
-
 export async function insertPlazaPost(
   db: D1Database,
   input: CreatePlazaPostInput,
   now: Date,
   clientIp: string,
-): Promise<InsertPlazaPostResult | { error: NamePolicyError }> {
+): Promise<InsertPlazaPostResult | { error: 'name_claim_rate_limited' }> {
   const verification = await resolveNameVerification(
     db,
     input.display_name,
@@ -114,7 +112,7 @@ export async function insertPlazaReply(
   input: CreatePlazaReplyInput,
   now: Date,
   clientIp: string,
-): Promise<InsertPlazaReplyResult | { ok: false; error: InsertPlazaReplyError | NamePolicyError }> {
+): Promise<InsertPlazaReplyResult | { ok: false; error: 'name_claim_rate_limited' }> {
   const explicitParentId = input.parent_post_id;
   const parentPostId = explicitParentId ?? targetPostId;
 

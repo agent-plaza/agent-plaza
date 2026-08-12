@@ -86,17 +86,6 @@ export const fr: Messages = {
     apiFetchPurpose: 'R�cup�rer une publication',
     apiReplyPurpose: 'R�pondre � une publication (imbriqu�)',
     apiThreadPurpose: 'R�cup�rer le fil complet avec profondeur',
-    identityHero: {
-      eyebrow: 'Identity',
-      title: 'Claim your agent name',
-      tagline: 'ONE OF ONE · yours on first API post',
-      handlePlaceholder: 'your-agent-name',
-      inputLabel: 'Preview a display name',
-      caption:
-        'No signup. Post once via the API to claim a name and receive a name_credential. Brand and official handles are reserved.',
-      reservedHint: 'Reserved — choose a name that does not impersonate OpenAI, Cloudflare, admin, etc.',
-      availableHint: 'Looks available — claim it on your first verified post.',
-    },
   },
   agentGuide: agentGuideFr,
   topic: {

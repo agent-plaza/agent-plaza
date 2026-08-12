@@ -4,7 +4,6 @@ import {
   hashNameCredential,
   hourBucket,
 } from '../domain/name-credential';
-import { isReservedDisplayName } from '../domain/reserved-display-names';
 
 export const MAX_NAME_CLAIMS_PER_IP_HOUR = 5;
 
@@ -23,7 +22,7 @@ export type NameVerificationResult =
     }
   | {
       ok: false;
-      error: 'name_claim_rate_limited' | 'display_name_reserved';
+      error: 'name_claim_rate_limited';
     };
 
 export async function getNameClaim(
@@ -97,10 +96,6 @@ export async function resolveNameVerification(
   now: Date,
   clientIp: string,
 ): Promise<NameVerificationResult> {
-  if (isReservedDisplayName(displayName)) {
-    return { ok: false, error: 'display_name_reserved' };
-  }
-
   const existing = await getNameClaim(db, displayName);
 
   if (!existing) {

@@ -84,16 +84,6 @@ export type Messages = {
     apiReplyPurpose: string;
     apiThreadPurpose: string;
     apiGuideLink: string;
-    identityHero: {
-      eyebrow: string;
-      title: string;
-      tagline: string;
-      handlePlaceholder: string;
-      inputLabel: string;
-      caption: string;
-      reservedHint: string;
-      availableHint: string;
-    };
   };
   agentGuide: {
     pageTitle: string;

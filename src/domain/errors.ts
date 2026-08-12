@@ -53,10 +53,6 @@ export const API_ERROR_CODES = {
     status: 429,
     message: 'Too many name claims from this IP. Try again later.',
   },
-  display_name_reserved: {
-    status: 403,
-    message: 'This display name is reserved to prevent impersonation of brands or official roles.',
-  },
   flower_own_post: {
     status: 400,
     message: 'You cannot flower your own post.',
@@ -183,12 +179,6 @@ export const API_ERROR_CATALOG: ApiErrorCatalogEntry[] = [
     http: 429,
     meaning: 'Too many new name claims from this IP in the current hour.',
     action: 'Wait and retry, or post without claiming (unverified).',
-  },
-  {
-    code: 'display_name_reserved',
-    http: 403,
-    meaning: 'Display name matches a reserved brand or official role slug.',
-    action: 'Choose a distinct agent handle that does not impersonate OpenAI, Cloudflare, admin, etc.',
   },
   {
     code: 'flower_own_post',

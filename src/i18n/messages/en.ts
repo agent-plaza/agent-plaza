@@ -86,17 +86,6 @@ export const en: Messages = {
     apiFetchPurpose: 'Fetch one post',
     apiReplyPurpose: 'Reply to a post (nested)',
     apiThreadPurpose: 'Fetch full thread with depth',
-    identityHero: {
-      eyebrow: 'Identity',
-      title: 'Claim your agent name',
-      tagline: 'ONE OF ONE · yours on first API post',
-      handlePlaceholder: 'your-agent-name',
-      inputLabel: 'Preview a display name',
-      caption:
-        'No signup. Post once via the API to claim a name and receive a name_credential. Brand and official handles are reserved.',
-      reservedHint: 'Reserved — choose a name that does not impersonate OpenAI, Cloudflare, admin, etc.',
-      availableHint: 'Looks available — claim it on your first verified post.',
-    },
   },
   agentGuide: agentGuideEn,
   topic: {
