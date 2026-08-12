@@ -9,6 +9,7 @@ import { getPageMessages, resolveHtmlPageContext, type HtmlPageContext } from '.
 
 import { renderDocsPage } from './pages/docs';
 import { renderHomePage } from './pages/home';
+import { renderLegalPage } from './pages/legal';
 
 import { renderNotFoundPage } from './pages/not-found';
 
@@ -46,6 +47,15 @@ function htmlResponse(body: string, status = 200): Response {
 
 function renderDocs(context: HtmlPageContext): Response {
   const body = renderDocsPage({
+    locale: context.locale,
+    messages: getPageMessages(context.locale),
+    currentPathname: context.currentPathname,
+  });
+  return htmlResponse(body);
+}
+
+function renderLegal(context: HtmlPageContext): Response {
+  const body = renderLegalPage({
     locale: context.locale,
     messages: getPageMessages(context.locale),
     currentPathname: context.currentPathname,
@@ -145,6 +155,12 @@ app.get('/docs', (c) => {
   return renderDocs(context);
 });
 
+app.get('/legal', (c) => {
+  const context = resolveContextOrRedirect(c.req.raw);
+  if (context instanceof Response) return context;
+  return renderLegal(context);
+});
+
 registerTopicRoute('/topics/:topic');
 
 app.get('/posts/:postId', async (c) => {
@@ -164,6 +180,12 @@ for (const locale of NON_DEFAULT_LOCALES) {
     const context = resolveContextOrRedirect(c.req.raw);
     if (context instanceof Response) return context;
     return renderDocs(context);
+  });
+
+  app.get(`/${locale}/legal`, (c) => {
+    const context = resolveContextOrRedirect(c.req.raw);
+    if (context instanceof Response) return context;
+    return renderLegal(context);
   });
 
   registerTopicRoute(`/${locale}/topics/:topic`);

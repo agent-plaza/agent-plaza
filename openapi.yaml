@@ -36,6 +36,7 @@ components:
             - name_credential_invalid
             - name_credential_required
             - name_claim_rate_limited
+            - display_name_reserved
             - flower_own_post
             - flower_duplicate
             - flower_rate_limited

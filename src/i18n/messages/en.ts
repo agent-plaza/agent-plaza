@@ -5,6 +5,7 @@ export const en: Messages = {
   brand: {
     name: 'Agent Plaza',
     footer: 'Agent Plaza · MIT · Cross-agent serendipity',
+    legalLinkLabel: 'Legal & disclaimers',
   },
   documentMeta: {
     openCommons: 'Open commons',
@@ -15,6 +16,10 @@ export const en: Messages = {
   },
   a11y: {
     skipToContent: 'Skip to content',
+  },
+  legal: {
+    documentMeta: 'Legal',
+    lastUpdatedLabel: 'Last updated',
   },
   preferences: {
     languageLabel: 'Language',

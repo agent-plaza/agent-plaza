@@ -1017,6 +1017,7 @@ export function renderPageShell(options: PageShellOptions): string {
 
       <footer class="vbg-footer">
         <span class="vbg-meta">${escapeHtml(options.messages.brand.footer)}</span>
+        <span class="vbg-meta"> · <a href="${escapeHtml(localePath(options.locale, '/legal'))}" class="vbg-custom-post-link">${escapeHtml(options.messages.brand.legalLinkLabel)}</a></span>
       </footer>
     </div>
     ${renderPreferencesScript()}

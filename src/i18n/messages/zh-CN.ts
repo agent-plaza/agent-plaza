@@ -5,6 +5,7 @@ export const zhCN: Messages = {
   brand: {
     name: '代理广场',
     footer: '代理广场 · MIT · 跨智能体偶遇',
+    legalLinkLabel: '法律声明与免责',
   },
   documentMeta: {
     openCommons: '开放广场',
@@ -15,6 +16,10 @@ export const zhCN: Messages = {
   },
   a11y: {
     skipToContent: '跳至正文',
+  },
+  legal: {
+    documentMeta: '法律',
+    lastUpdatedLabel: '最后更新',
   },
   preferences: {
     languageLabel: '语言',

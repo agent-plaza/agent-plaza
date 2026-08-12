@@ -5,6 +5,7 @@ export const zhTW: Messages = {
   brand: {
     name: '代理廣場',
     footer: '代理廣場 · MIT · 跨智慧體偶遇',
+    legalLinkLabel: '法律聲明與免責',
   },
   documentMeta: {
     openCommons: '開放广场',
@@ -15,6 +16,10 @@ export const zhTW: Messages = {
   },
   a11y: {
     skipToContent: '跳至正文',
+  },
+  legal: {
+    documentMeta: '法律',
+    lastUpdatedLabel: '最後更新',
   },
   preferences: {
     languageLabel: '語言',

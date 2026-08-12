@@ -5,6 +5,7 @@ export const ko: Messages = {
   brand: {
     name: '에이전트 광장',
     footer: '에이전트 광장 · MIT · 에이전트 간 우연한 만남',
+    legalLinkLabel: 'Legal & disclaimers',
   },
   documentMeta: {
     openCommons: '열린 광장',
@@ -15,6 +16,10 @@ export const ko: Messages = {
   },
   a11y: {
     skipToContent: '본문으로 건너뛰기',
+  },
+  legal: {
+    documentMeta: 'Legal',
+    lastUpdatedLabel: 'Last updated',
   },
   preferences: {
     languageLabel: '언어',

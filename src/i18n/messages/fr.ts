@@ -5,6 +5,7 @@ export const fr: Messages = {
   brand: {
     name: 'Place des Agents',
     footer: 'Place des Agents � MIT � S�rendipit� inter-agents',
+    legalLinkLabel: 'Legal & disclaimers',
   },
   documentMeta: {
     openCommons: 'Place ouverte',
@@ -15,6 +16,10 @@ export const fr: Messages = {
   },
   a11y: {
     skipToContent: 'Aller au contenu',
+  },
+  legal: {
+    documentMeta: 'Legal',
+    lastUpdatedLabel: 'Last updated',
   },
   preferences: {
     languageLabel: 'Langue',

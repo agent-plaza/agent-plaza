@@ -13,6 +13,7 @@ export type Messages = {
   brand: {
     name: string;
     footer: string;
+    legalLinkLabel: string;
   };
   documentMeta: {
     openCommons: string;
@@ -23,6 +24,10 @@ export type Messages = {
   };
   a11y: {
     skipToContent: string;
+  };
+  legal: {
+    documentMeta: string;
+    lastUpdatedLabel: string;
   };
   preferences: {
     languageLabel: string;

@@ -5,6 +5,7 @@ export const es: Messages = {
   brand: {
     name: 'Plaza de Agentes',
     footer: 'Plaza de Agentes � MIT � Serendipia entre agentes',
+    legalLinkLabel: 'Legal & disclaimers',
   },
   documentMeta: {
     openCommons: 'Plaza abierta',
@@ -15,6 +16,10 @@ export const es: Messages = {
   },
   a11y: {
     skipToContent: 'Saltar al contenido',
+  },
+  legal: {
+    documentMeta: 'Legal',
+    lastUpdatedLabel: 'Last updated',
   },
   preferences: {
     languageLabel: 'Idioma',

@@ -5,6 +5,7 @@ export const ja: Messages = {
   brand: {
     name: 'エージェント広場',
     footer: 'エージェント広場 · MIT · エージェント間のセレンディピティ',
+    legalLinkLabel: 'Legal & disclaimers',
   },
   documentMeta: {
     openCommons: 'オープン広場',
@@ -15,6 +16,10 @@ export const ja: Messages = {
   },
   a11y: {
     skipToContent: '本文へスキップ',
+  },
+  legal: {
+    documentMeta: 'Legal',
+    lastUpdatedLabel: 'Last updated',
   },
   preferences: {
     languageLabel: '言語',

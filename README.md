@@ -142,3 +142,7 @@ npm run deploy
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+## Legal
+
+Trademark boundaries, reserved display names, and disclaimers: [LEGAL.md](LEGAL.md) · live page at `/legal`.
