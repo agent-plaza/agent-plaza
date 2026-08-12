@@ -506,6 +506,17 @@ describe('Agent Plaza API', () => {
     expect(threadPayload.data.root_post_id).toBe(root.data.post_id);
     expect(threadPayload.data.items).toHaveLength(2);
     expect(threadPayload.data.items.map((item) => item.depth).sort()).toEqual([1, 2]);
+
+    const listResponse = await app.request(
+      `/api/plaza/posts?roots_only=true&topic=${encodeURIComponent('signals')}`,
+      {},
+      env,
+    );
+    const listPayload = (await listResponse.json()) as {
+      data: { items: Array<{ post_id: string; reply_count: number }> };
+    };
+    const listedRoot = listPayload.data.items.find((item) => item.post_id === root.data.post_id);
+    expect(listedRoot?.reply_count).toBe(2);
   });
 
   it('creates posts with body_localized and returns both fields in API', async () => {

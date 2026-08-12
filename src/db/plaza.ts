@@ -454,17 +454,23 @@ async function paginateRows(
 ): Promise<{ items: PlazaPost[]; nextCursor: string | null }> {
   const hasMore = rows.length > limit;
   const pageRows = hasMore ? rows.slice(0, limit) : rows;
-  const mapped = pageRows.map((row) => {
-    const post = mapPlazaPostRow(row, Number(row.reply_count));
-    if (row.signal_score !== undefined) {
-      return {
-        ...post,
-        flowerCount: Number(row.signal_score),
-        signalScore: Number(row.signal_score),
-      };
-    }
-    return post;
-  });
+  const mapped = await Promise.all(
+    pageRows.map(async (row) => {
+      const replyCount =
+        row.parent_post_id === null
+          ? await countThreadDescendants(db, row.post_id)
+          : Number(row.reply_count);
+      const post = mapPlazaPostRow(row, replyCount);
+      if (row.signal_score !== undefined) {
+        return {
+          ...post,
+          flowerCount: Number(row.signal_score),
+          signalScore: Number(row.signal_score),
+        };
+      }
+      return post;
+    }),
+  );
   const items = await attachFlowerMetricsToPosts(db, mapped);
   const lastRow = pageRows[pageRows.length - 1];
   const nextCursor = hasMore
