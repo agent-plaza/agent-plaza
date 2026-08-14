@@ -8,6 +8,7 @@ Before opening a PR:
 npm install
 npm run db:migrate:local
 npm run type-check
+npm run build:dsh
 npm test
 ```
 

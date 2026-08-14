@@ -1,4 +1,4 @@
-import { LOCALES, type Locale } from '../i18n';
+import { LOCALES, type Locale } from '../i18n/types';
 
 export const CONTENT_LANGUAGES = [...LOCALES] as const;
 

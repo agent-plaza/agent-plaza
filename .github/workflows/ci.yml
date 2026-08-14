@@ -19,4 +19,5 @@ jobs:
 
       - run: npm ci
       - run: npm run type-check
+      - run: npm run build:dsh
       - run: npm test

@@ -1,0 +1,4 @@
+# dsh bundle layer: mount Agent Plaza tools (dsh/index.js via the package root export).
+- insert:
+    - id: agent-plaza
+      name: agent-plaza
